@@ -1,0 +1,57 @@
+# https://manpages.ubuntu.com/manpages/bionic/man1/pdflatex.1.html
+kind: pipeline
+name: default
+
+steps:
+  - name: build
+    image: tianon/latex
+    commands:
+      - pdflatex -interaction errorstopmode -halt-on-error -jobname RohitGohri -draftmode resume.tex
+
+trigger:
+  event:
+    exclude:
+      - tag
+
+---
+
+kind: pipeline
+name: release
+
+steps:
+  - name: add private file
+    image: alpine:latest
+    environment:
+      PRIVATE_CONTENT:
+        from_secret: private_file
+    commands:
+      - echo $PRIVATE_CONTENT > RohitGohri.tmp
+
+  - name: build
+    image: tianon/latex
+    commands:
+      - pdflatex -interaction errorstopmode -halt-on-error -jobname RohitGohri resume.tex
+
+  - name: release
+    image: plugins/github-release
+    settings:
+      api_key:
+        from_secret: github_token
+      files: 
+        - RohitGohri.pdf
+
+  - name: update on site
+    image: smartprix/drone-downstream
+    settings:
+      server: https://cloud.drone.io
+      token:
+        from_secret: drone_token
+      last_successful: true
+      deploy: resume
+      repositories:
+        - rohit-smpx/rohit-smpx.github.io@master
+
+trigger:
+  event: tag
+
+...

@@ -1,0 +1,346 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Medium Length Professional CV
+% LaTeX Template
+% Version 2.0 (8/5/13)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original author:
+% Trey Hunner (http://www.treyhunner.com/)
+%
+% Important note:
+% This template requires the resume.cls file to be in the same directory as the
+% .tex file. The resume.cls file provides the resume style used for structuring the
+% document.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[UKenglish]{resume} % Use the custom resume.cls style
+\usepackage{babel}
+\usepackage[stretch=10]{microtype}
+\usepackage[sc]{mathpazo}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\usepackage{fontawesome}
+\usepackage{datetime}
+\usepackage[left=0.6in,top=0.2in,right=0.6in,bottom=0.2in]{geometry}
+\usepackage{ifthen}
+
+\hypersetup{
+    colorlinks, %Colours links instead of ugly boxes
+    linkcolor={red!50!black}, %Colour of internal links
+    citecolor={blue!50!black}, %Colour of citations
+    % urlcolor={blue!40!black}, %Colour for external hyperlinks
+    urlcolor={black}, %Colour for external hyperlinks
+    pdftitle={Rohit Gohri's Resume},
+    pdfauthor={Rohit Gohri <gohri.rohit@gmail.com>},
+    pdfsubject={Hire Me! Source: https://github.com/rohit-smpx/resume},
+    pdfkeywords={resume, cv, developer, nodejs, devops, ci, typescript, graphql, elastic}
+}
+
+\newdateformat{monthyeardate}{
+  \shortmonthname[\THEMONTH]. \THEYEAR
+}
+\newdateformat{yeardate}{
+  \THEYEAR
+}
+
+\newcommand{\mydate}[3][1]{%
+\unskip{% group start to scope date name
+\ifthenelse{\equal{#2}{}}{% If the 2nd arg is not provided only print the year
+    \newdate{anon}{#1}{1}{#3}%
+    \yeardate\displaydate{anon}%
+}{%
+    \newdate{anon}{#1}{#2}{#3}%
+    \monthyeardate\displaydate{anon}%
+}}}
+
+\newcommand{\showif}[2][false]{%
+{% group start to scope date name
+    % From: https://tex.stackexchange.com/a/243879
+    \newbox\anonvhbox
+    \newboolean{IncludeAnonItem}
+    \setboolean{IncludeAnonItem}{#1}
+
+    \setbox\anonvhbox\vbox{%
+    #2
+    \unskip\unpenalty\unpenalty}
+
+    \ifthenelse{\boolean{IncludeAnonItem}}{
+    \unvbox\anonvhbox
+    }{ }
+}}
+
+% Normalized italics
+\newcommand{\nem}[1]{\normalfont \em #1}
+
+\newcommand{\tab}[1]{\hspace{.2667\textwidth}\rlap{#1}}
+\newcommand{\itab}[1]{\hspace{0em}\rlap{#1}}
+
+%----------------------------------------------------------------------------------------
+%	VARIABLES
+%----------------------------------------------------------------------------------------
+
+% Your name
+\name{ Rohit Gohri }
+% Your address
+% \address{ New Delhi, India }
+
+\newcommand{\phoneNum}[0]{
+    % \faPhone \hspace{0.2mm} % Your phone number %
+    % \\
+}
+
+% Your profile links
+\address{
+    \faMapMarker \hspace{0.2mm} New Delhi, India
+    \\
+    \phoneNum
+    \href {mailto:gohri.rohit@gmail.com}
+        {\faEnvelope \hspace{0.2mm} gohri.rohit@gmail.com}
+    \\
+    \href {https://linkedin.com/in/rohit-gohri}
+        {\faLinkedin \hspace{0.2mm} rohit-gohri}
+    \\
+    \href {https://github.com/rohit-smpx}
+        {\faGithub \hspace{0.2mm} rohit-smpx}
+}
+
+% Override any variables/commands through a private file
+\InputIfFileExists{\jobname.tmp}{}{}
+
+\begin{document}
+
+%----------------------------------------------------------------------------------------
+%	EDUCATION SECTION
+%----------------------------------------------------------------------------------------
+
+\begin{rSection}{ Education }
+
+    \rSubsectionHeading
+        {Netaji Subhas Institute of Technology, \nem University of Delhi}
+        { \mydate{8}{2013} - \mydate{6}{2017} }
+        {\normalfont B.E. in Computer Engineering, CGPA: 7.35}
+        {Delhi, IN}
+    % \\ {\bfseries Courses}: Computer System Organisation, Operating Systems \smallskip
+    % TODO: Change courses
+
+    \rSubsectionHeading
+        {Faith Academy, \nem C.B.S.E.}
+        { \mydate{4}{2011} - \mydate{4}{2013} }
+        {\normalfont AISSCE, Percentage: 92.2\%}
+        {Delhi, IN}
+
+\end{rSection}
+
+%----------------------------------------------------------------------------------------
+%	SKILLS SECTION
+%----------------------------------------------------------------------------------------
+
+\begin{rSection}{Skills}
+
+    \begin{tabular}{ @{} >{\bfseries}l @{\hspace{6ex}} l }
+
+        Languages \& Frameworks     & Javascript, Typescript, NodeJS, GraphQL, VueJS, MarkoJS, jQuery, Mocha, Jest, C++ \\
+        Software \& Tools           & PM2, Nginx, Redis, PostgreSQL, Ansible, ElasticStack(ELK), Grafana, Docker \\
+        Other                       & Linux, Bash, SSH, Git, LaTeX, Adobe Photoshop \& InDesign \\
+    \end{tabular}
+
+\end{rSection}
+
+%----------------------------------------------------------------------------------------
+%	WORK EXPERIENCE SECTION
+%----------------------------------------------------------------------------------------
+
+\begin{rSection}{Work Experience}
+
+    \begin{rSubsection}
+        {\href{https://www.smartprix.com}{Smartprix.com}}
+        { \mydate{9}{2017} - Present }
+        {Software Developer}
+        {Noida, IN}
+
+        \item Led a team to make website ready for US launch, worked on VueJS admin, \textbf{NodeJS} backend, and GraphQL API
+        \item Built an email library using NodeJS, Mailgun, and \textbf{Redis} backed queue workers
+        \item Responsible for production \textbf{deployments} with PM2 and infrastructure configuration with \textbf{Ansible}
+        \item Developed a script around Wal-E to take continuous backups of \textbf{PostgreSQL} DB and save weekly backups to GCS
+        \item Generated dynamic popularity factor for products through \textbf{ElasticSearch} queries on visitor data
+        \item Enabled static type checking of projects by adding \textbf{Typescript} type definitions to existing NodeJS modules
+        \item Built automated \textbf{CI pipelines} to increase coverage by \textbf{26\%} and run integration tests across repositories
+        \item Deployed a logging \& monitoring environment (ELK, InfluxDB) which gathers log, visit \& system data
+        \item Setup \textbf{Kibana \& Grafana} and made dashboards to monitor and visualize various metrics, and set alerts
+        \item Migrated legacy jQuery code to a modern \textbf{Webpack} build system, fixing IE9 support
+        \item Improved a \textbf{GraphQL} schema and query builder to support extending interfaces and global fragments
+        \item Converted a Mocha test suite to use Snapshot testing allowing new features to be added more easily
+
+    \end{rSubsection}
+
+%------------------------------------------------
+
+    \begin{rSubsection}
+        {\href{https://github.com/rohit-smpx?tab=repositories&q=Woobus&type=public}{WooBus.in}}
+        { \mydate{12}{2015} - \mydate{1}{2016} }
+        {Software Devlopment Internship}
+        {Bengaluru, IN}
+
+        \item Setup audit reporting \textbf{REST} API routes for submitting data and sending email alerts
+        \item Created corresponding Android App that generates dynamic forms according to API
+        \item Improved a Cordova App that works with a \textbf{RaspberryPi} to provide offline experiences during bus journeys
+        % \item Revamped frontend design with MaterializeCSS leading to a native look for the app
+    \end{rSubsection}
+
+\end{rSection}
+
+%--------------------------------------------------------------------------------
+%    Projects
+%-----------------------------------------------------------------------------------------------
+
+\begin{rSection}{Projects}
+
+    % TODO: Move to single line in end?
+    \begin{rSubsection}
+        {Open Source Contributions}
+        { \mydate{5}{2019} - Present }
+        {}{}
+
+        % \item \href{https://github.com/bahmutov/snap-shot-core/pull/208}{\textbf{snap-shot-core}}: Added a feature to store snapshot files in directory relative to test file in a plugin for mocha test
+        \item \href{https://github.com/jimmywarting/FormData/pull/87}{\textbf{form-data-polyfill}}: Fixed a bug that broke form submissions when using with {\em Blob.js} polyfill on IE9
+        \item \href{https://github.com/danger/danger-js/pull/892}{\textbf{danger-js}}: Added a feature to customize pull request messages with different emojis \faHeart
+        \item \href{https://github.com/web-push-libs/web-push/pull/456}{\textbf{web-push}}: Fixed a bug where old Google push endpoints stopped working after migrating to Firebase
+    \end{rSubsection}
+
+    \begin{rSubsection}
+        {\href{https://github.com/rohit-smpx/inno}{Innovision Website}, {\nem NSIT}}
+        { \mydate{1}{2016} - \mydate{3}{2016} }
+        {}{}
+        \item Led a team to design and develop the website for NSIT’s Tech Fest using \textbf{NodeJS}, MongoDB, and MaterializeCSS
+        \item Worked on user \& event management, social login, \textbf{email campaigns}, and deployments
+        \item The site was deployed on Digital Ocean and had a traffic of over \textbf{65K} views and 5K signups
+    \end{rSubsection}
+
+    \begin{rSubsection}
+        {\href{https://github.com/rohit-smpx/trafficRL}{Adaptive Traffic Light Control Using Reinforcement Learning (RL)}, {\nem NSIT}}
+        { \mydate{1}{2017} - \mydate{6}{2017} }
+        {}{}
+
+        \item Ran a study comparing different methods to reduce traffic in a traffic simulator (\href{https://sumo.dlr.de}{SUMO})
+        \item Automated vehicle generation and traffic light control in SUMO using \textbf{Python}
+        \item Used RL to calculate the next traffic light phase using current conditions while minimizing wait time
+    \end{rSubsection}
+
+    \showif[false]{
+    \begin{rSubsection}
+        {}{}{}{}
+
+        \item \href{https://github.com/rohit-smpx/zomato-telegram-bot}{\textbf{Zomato Telegram Bot}}: Made with Typescript using official Zomato API to search for nearby restaurants
+        \item \href{https://github.com/rohit-smpx/resume}{\textbf{This Resume}}: Built with Latex with automated builds using Drone.io
+    \end{rSubsection}
+    }
+
+
+\end{rSection}
+
+%----------------------------------------------------------------------------------------
+%	OTHER SECTIONS
+%----------------------------------------------------------------------------------------
+
+% Non bullet points
+\showif[false]{
+\begin{rSection}{Activities and Achievements} \itemsep -2pt
+    \item Best College Team, Abhimanyu - The Fresher’s Quiz, 2013
+    \item Awarded 1\textsuperscript{st} Prize, CSI-NSIT B‘n‘B Magazine Cover Design Competition, 2014
+    \item Organised and conducted a workshop on Image Editing attended by 100+ students, 2015
+\end{rSection}
+}
+
+%----------------------------------------------------------------------------------------
+
+\begin{rSection}{Extra-Curricular} \itemsep -3pt
+    \begin{rSubsection}
+        {\href{http://alliancensit.com/our-editions/}{The Alliance - NSIT's Newspaper}}
+        { \mydate{2}{2014} - \mydate{6}{2017} }
+        {}{}
+
+        \item Designed 8 editions and successfully oversaw the launch of 5 editions as the \textbf{Managing Editor}
+        \item Revamped the Wordpress website to include an archive of old articles and kick-start a blog
+    \end{rSubsection}
+
+    %------------------------------------------------
+
+    \showif[false]{%
+    \begin{rSubsection}
+        {\href{https://www.facebook.com/mokshansit}{MDT Design Team - NSIT}, {\normalfont \em Creative Head}}
+        { \mydate{3}{2014} - \mydate{6}{2017} }
+        {}{}
+
+        \item Designed posters and brochures for the Cultural \& Technical festivals of NSIT
+    \end{rSubsection}
+    }
+
+    %------------------------------------------------
+
+    \showif[false]{%
+    \begin{rSubsection}
+        {CSI-NSIT, {\normalfont \em Member}}
+        { \mydate{1}{2014} - \mydate{6}{2015} }
+        {}{}
+        \item 1st Prize, Magazine Cover Design Competition
+        \item Held the 2015 CSI Photoshop workshop with 100+ attendees
+    \end{rSubsection}
+    }
+\end{rSection}
+
+%----------------------------------------------------------------------------------------
+
+% Tabular data
+\showif[false]{%
+% TODO: Add courses
+\begin{rSection}{Relevant Courses}
+    \itab{\textbf{Core Courses}} \tab{}  \tab{\textbf{Other Courses}}
+    \\ \itab{Operating Systems} \tab{}  \tab{Computer System Organisation}
+    \\ \itab{Networks} \tab{}  \tab{IOME}
+    \\ \itab{DBMS} \tab{}  \tab{Some Subject}
+\end{rSection}
+}
+
+
+%----------------------------------------------------------------------------------------
+%	PoR SECTION
+%----------------------------------------------------------------------------------------
+
+
+\showif[false]{%
+\begin{rSection}{POSITION OF RESPONSIBILITY}
+
+    \begin{rSubsection}
+        {The Alliance - NSIT's Newspaper}
+        { \mydate{2}{2014} - \mydate{6}{2017} }
+        {Managing Editor}{}
+
+        \item Successfully oversaw the launch of 5 editions as the Managing Editor
+        \item Designed 8 editions of the newspaper which reached an audience of 10k people
+        \item Revamped the Wordpress website to help kick-start a blog for the journalists
+    \end{rSubsection}
+
+    %------------------------------------------------
+
+    \begin{rSubsection}
+        {MDT Design Team, NSIT}
+        { \mydate{3}{2014} - \mydate{6}{2017} }
+        {Creative Head}{}
+
+        \item Directly responsible for the publicity of the Cultural \& Technical festivals for 3 years
+        \item Designed posters that have collectively reached an audience of 50,000+
+        \item Created Sponsorship Brochures each year that helped bring in record sponsorships
+    \end{rSubsection}
+
+\end{rSection}
+}
+
+
+\end{document}
